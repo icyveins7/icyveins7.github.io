@@ -241,7 +241,7 @@ disableHugoGeneratorInject = false
 
   [[params.social]]
     name = "linkedin"
-    url  = "https://www.linkedin.com/"
+    url  = "https://www.linkedin.com/in/gabriel-lim-6454a8185"
 
   # [[params.social]]
   #   name = "stackoverflow"
@@ -281,3 +281,11 @@ disableHugoGeneratorInject = false
 
 [markup.goldmark.renderer]
   unsafe = true
+
+# Enable math
+[markup.goldmark.extensions.passthrough]
+  enable = true
+
+[markup.goldmark.extensions.passthrough.delimiters]
+  block = [["\\[", "\\]"], ["$$", "$$"]]
+  inline = [["\\(", "\\)"], ["$", "$"]]
