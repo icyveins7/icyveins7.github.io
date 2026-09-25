@@ -1,3 +1,6 @@
+// NOTE: this is a standalone separate program, only used during the
+// initial conversion. Generated mostly by AI.
+// If needed again, just do `go build converter.go` in this directory.
 package main
 
 import (
