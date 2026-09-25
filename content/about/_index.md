@@ -49,7 +49,7 @@ hr {
 
   <div class="about-content">
     <p>
-        Physicist by training; digital signal processing engineer by craft.
+        Physicist by training; digital signal (and now image!) processing engineer by craft.
         Loves writing software in C++ and Python, and custom CUDA kernels.
     </p>
   </div>
