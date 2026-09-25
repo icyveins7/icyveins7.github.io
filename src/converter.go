@@ -20,12 +20,13 @@ type Frontmatter struct {
 }
 
 func main() {
-	if len(os.Args) != 2 {
-		fmt.Fprintf(os.Stderr, "usage: %s <old-post.md>\n", filepath.Base(os.Args[0]))
+	if len(os.Args) != 3 {
+		fmt.Fprintf(os.Stderr, "usage: %s <old-post.md> <output-post.md>\n", filepath.Base(os.Args[0]))
 		os.Exit(1)
 	}
 
 	inputPath := os.Args[1]
+	outputPath := os.Args[2]
 
 	data, err := os.ReadFile(inputPath)
 	if err != nil {
@@ -42,7 +43,13 @@ func main() {
 		fatal(err)
 	}
 
-	outputPath := convertedPath(inputPath)
+	// Create the output directory recursively if it does not exist.
+	outputDir := filepath.Dir(outputPath)
+	if outputDir != "." {
+		if err := os.MkdirAll(outputDir, 0755); err != nil {
+			fatal(err)
+		}
+	}
 
 	if err := os.WriteFile(outputPath, []byte(newPost), 0644); err != nil {
 		fatal(err)
@@ -303,17 +310,6 @@ func convertPost(fm Frontmatter, body []byte) (string, error) {
 	out.Write(body)
 
 	return out.String(), nil
-}
-
-func convertedPath(inputPath string) string {
-	ext := filepath.Ext(inputPath)
-
-	if ext == "" {
-		return inputPath + ".converted.md"
-	}
-
-	base := strings.TrimSuffix(inputPath, ext)
-	return base + ".converted" + ext
 }
 
 func fatal(err error) {
